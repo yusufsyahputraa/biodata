@@ -1,6 +1,7 @@
 # Python bytecode
-*.pyc
+*.py[cod]
 __pycache__/
+**/__pycache__/
 
 # SQLite database (jika ada)
 db.sqlite3
@@ -9,10 +10,12 @@ db.sqlite3
 env/
 venv/
 ENV/
+.venv/
 
 # Static files (jika kamu TIDAK pakai collectstatic)
 staticfiles/
 staticfiles_build/
+static/
 
 # Environment & secrets
 .env
@@ -29,7 +32,17 @@ secrets.json
 *.log
 *.bak
 *.swp
+*.tmp
 
 # Django migration cache
 **/migrations/__pycache__/
 **/migrations/*.pyc
+**/migrations/*.pyo
+
+# Pytest
+.pytest_cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
