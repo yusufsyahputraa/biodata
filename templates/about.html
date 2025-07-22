@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tentang Saya</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    line-height: 1.6;
+  }
+
+  header {
+    background-color: #333;
+    padding: 20px 0;
+    border-bottom: 1px solid #333;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-size: 22px;
+    color: #00e0b7;
+    margin-bottom: 10px;
+  }
+
+  nav a {
+    color: #bbb;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+
+  nav a:hover {
+    color: #00e0b7;
+  }
+
+  .content {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .profile {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .foto-profil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00e0b7;
+    margin-bottom: 20px;
+  }
+
+  .typewriter {
+    color: #00e0b7;
+    font-size: 24px;
+    border-right: 2px solid #00e0b7;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #00e0b7 }
+  }
+
+  .intro p {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  footer {
+    background-color: #1f1f1f;
+    text-align: center;
+    padding: 20px 0;
+    color: #888;
+    font-size: 14px;
+    margin-top: 40px;
+  }
+
+  table td {
+    text-align: justify;
+  }
+
+  /* HOBI STYLING */
+  .hobi-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .hobi-item {
+    display: flex;
+    align-items: center;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .hobi-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+  }
+
+  .hobi-text {
+    padding: 0 20px;
+    color: #e0e0e0;
+    text-align: justify;
+  }
+
+  .hobi-text h5 {
+    color: #00e0b7;
+    margin-bottom: 10px;
+  }
+
+  .hobi-item.even {
+    flex-direction: row-reverse;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Selamat Datang di Website Saya</h1>
+      <nav>
+        <a href="{% url 'dashboard'%}">Beranda</a>
+        <a href="{% url 'motivasi' %}">Motivasi</a>
+        <a href="{% url 'kontak'%}">Kontak</a>
+        <a href="{% url 'about'%}">Tentang Saya</a>
+      </nav>
+    </div>
+  </header>
+
+<!-- CONTENT -->
+<div class="container mt-5">
+
+<!-- Biodata -->
+<section id="biodata" class="mb-5">
+  <h2>Profil Saya</h2>
+  <div class="row align-items-center text-center">
+    <div class="col-md-3">
+      <img src="{% static 'images/foto profil.jpeg' %}" class="img-thumbnail" alt="Foto Saya">
+    </div>
+    <div class="col-md-9 text-start">
+      <table class="table-no-border">
+        <tr>
+          <th>Nama</th>
+          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Muhammad Yusuf Syahputra</td>
+        </tr>
+        <tr>
+          <th>Tanggal Lahir</th>
+          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Sangatta, 28 Juni 2005</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>&nbsp;&nbsp;:&nbsp;&nbsp; myusuf28062005@gmail.com</td>
+        </tr>
+        <tr>
+          <th>Alamat</th>
+          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Jl. Diponegoro Gg. Taruna 5 No. 119 Rt.10 Sangatta Utara</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Hobi -->
+<section id="hobi" class="mb-5">
+  <h2 class="section-title text-left mb-4">Hobi</h2>
+  <div class="hobi-container">
+
+    <!-- Badminton -->
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>Badminton</h5>
+        <p>Badminton merupakan salah satu hobi yang saya tekuni secara rutin di waktu luang.
+        Selain sebagai bentuk olahraga yang menyenangkan, badminton juga memberikan banyak manfaat positif bagi kesehatan fisik dan mental. 
+        Melalui olahraga ini, saya belajar untuk lebih disiplin, meningkatkan fokus, serta melatih daya tahan tubuh.</p>
+      </div>
+    </div>
+
+    <!-- Coding -->
+    <div class="hobi-item even">
+      <div class="hobi-text">
+        <h5>Coding</h5>
+        <p>Saya memiliki minat yang besar terhadap dunia teknologi informasi, khususnya dalam bidang pemrograman. 
+        Kegiatan ini saya lakukan secara konsisten di waktu luang sebagai bentuk pengembangan diri sekaligus latihan berpikir logis.
+        Hobi ini telah membantu saya mengembangkan keterampilan teknis dan memperluas wawasan digital.</p>
+      </div>
+    </div>
+
+    <!-- Jaringan Komputer -->
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>Jaringan Komputer</h5>
+        <p>Saya memiliki keahlian dasar di bidang jaringan komputer, termasuk instalasi, konfigurasi, dan troubleshooting sistem jaringan lokal (LAN). 
+        Saya juga memahami perangkat seperti router dan switch, serta dasar keamanan jaringan.
+        Minat ini saya kembangkan melalui praktik langsung dan pembelajaran mandiri.</p>
+      </div>
+    </div>
+
+    <!-- Bermain game -->
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>Bermain Game</h5>
+        <p>Bermain game adalah salah satu hobi yang saya gemari karena tidak hanya memberikan hiburan, 
+          tetapi juga melatih kemampuan berpikir strategis, pengambilan keputusan, dan konsentrasi. 
+          Melalui berbagai jenis permainan, saya belajar bagaimana bekerja sama dalam tim, mengatur strategi, 
+          serta menghadapi tantangan secara kreatif dan efisien. 
+          Selain itu, game juga memperkenalkan saya pada dunia teknologi dan desain interaktif, 
+          yang semakin memperdalam minat saya terhadap perkembangan industri digital. 
+          Bagi saya, bermain game bukan sekadar aktivitas mengisi waktu luang, tetapi juga cara untuk mengasah 
+          keterampilan dan menjalin relasi sosial secara positif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pendidikan -->
+<section id="pendidikan" class="mb-5">
+  <h2 class="section-title text-left mb-4">Pendidikan</h2>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>2017 - 2020</h5>
+        <p>SMP YPPSB Prima School</p>
+      </div>
+    </div>
+  </div>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>2020 - 2023</h5>
+        <p>SMK Negeri 1 Sangatta Utara</p>
+      </div>
+    </div>
+  </div>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <h5>2023 - Sekarang</h5>
+        <p>Universitas Muhammadiyah Kalimantan Timur</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- pengalaman -->
+<section id="pengalaman" class="mb-5">
+  <h2 class="section-title text-left mb-4">Pengalaman</h2>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <p>Praktik kerja lapangan di DPRD Kutai Timur</p>
+      </div>
+    </div>
+  </div>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <p>Praktik kerja lapangan di TVRI Kalimantan Timur</p>
+      </div>
+    </div>
+  </div>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <p>Kompeten dalam Uji sertifikasi kompetensi Teknik Komputer Jaringan</p>
+      </div>
+    </div>
+  </div>
+  <div class="hobi-container">
+    <div class="hobi-item">
+      <div class="hobi-text">
+        <p>Sertifikat berpatisipasi Robot Car Soccer di HIMATIKA FESTIVAL 2024</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
