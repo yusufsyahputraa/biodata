@@ -1,17 +1,15 @@
 {
-    "builds": [
-      {
-        "src": "api/index.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "api/index.py"
-      }
-    ],
-      "rewrites": [
-        { "source": "/static/(.*)", "destination": "/staticfiles/$1" }
-      ]
+  "buildCommand": "python manage.py collectstatic --noinput",
+  "outputDirectory": "staticfiles",
+  "ignoreCommand": "echo 'No files to ignore'",
+  "rewrites": [
+    {
+      "source": "/static/(.*)",
+      "destination": "/staticfiles/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/wsgi.py"
+    }
+  ]
 }
