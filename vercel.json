@@ -1,7 +1,4 @@
   {
-    "buildCommand": "python manage.py collectstatic --noinput",
-    "outputDirectory": "staticfiles",
-    "ignoreCommand": "echo 'No files to ignore'",
     "rewrites": [
       {
         "source": "/static/(.*)",
