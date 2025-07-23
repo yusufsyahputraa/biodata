@@ -1,15 +1,19 @@
-{
-  "buildCommand": "python manage.py collectstatic --noinput",
-  "outputDirectory": "staticfiles",
-  "ignoreCommand": "echo 'No files to ignore'",
-  "rewrites": [
-    {
-      "source": "/static/(.*)",
-      "destination": "/staticfiles/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/wsgi.py"
-    }
-  ]
-}
+  {
+    "buildCommand": "python manage.py collectstatic --noinput",
+    "outputDirectory": "staticfiles",
+    "ignoreCommand": "echo 'No files to ignore'",
+    "rewrites": [
+      {
+        "source": "/static/(.*)",
+        "destination": "/staticfiles/$1"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/wsgi.py"
+      },
+      {
+        "source": "/(.*)",
+        "destination": "/api/index.py"
+      }
+    ]
+  }
