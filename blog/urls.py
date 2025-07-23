@@ -13,6 +13,3 @@ urlpatterns = [
     path('motivasi/', views.motivasi_view, name='motivasi'),
     path('', include('self.urls')),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
