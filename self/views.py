@@ -10,18 +10,17 @@ def dashboard_view(request):
 def motivasi_view(request):
     return render(request, 'motivasi.html')
 
+def sertifikat(request):
+    return render(request, 'sertifikat.html')
+
 def kontak_view(request):
     if request.method == 'POST':
         nama = request.POST.get('nama')
         email = request.POST.get('email')
-        pesan = request.POST.get('message')
+        pesan = request.POST.get('pesan')
 
-        Kontak.objects.create(
-            nama=nama,
-            email=email,
-            pesan=pesan
-        )
-
+        Kontak.objects.create(nama=nama, email=email, pesan=pesan)
+        messages.success(request, 'Pesan berhasil dikirim! Terima kasih')
         return redirect('kontak')
 
     return render(request, 'kontak.html')

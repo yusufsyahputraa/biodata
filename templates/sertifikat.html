@@ -1,0 +1,175 @@
+  {% load static %}
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sertifikat - Yusuf.dev</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --accent: #00e0b7;
+        --accent-dim: rgba(0, 224, 183, 0.15);
+        --bg: #0d0d0d;
+        --bg-card: #1a1a1a;
+        --bg-header: #111111;
+        --text: #e0e0e0;
+        --text-muted: #888;
+        --border: #2a2a2a;
+      }
+      body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+
+      header { background-color: var(--bg-header); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+      .header-inner { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
+      .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+      .logo span { color: var(--text); font-weight: 300; }
+      nav a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: 14px; font-weight: 500; transition: color 0.2s; position: relative; }
+      nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+      nav a:hover { color: var(--accent); }
+      nav a:hover::after { width: 100%; }
+
+      .page-hero { width: 90%; max-width: 1100px; margin: 60px auto 40px; }
+      .section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+      .page-hero h1 { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+      .page-hero p { font-size: 15px; color: var(--text-muted); }
+
+      .cert-wrapper { width: 90%; max-width: 1100px; margin: 0 auto 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+
+      .cert-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.3s, transform 0.2s; cursor: pointer; }
+      .cert-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+      .cert-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; background: #111; }
+      .cert-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+      .cert-card:hover .cert-img-wrap img { transform: scale(1.05); }
+      .cert-overlay { position: absolute; inset: 0; background: rgba(0,224,183,0.15); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
+      .cert-card:hover .cert-overlay { opacity: 1; }
+      .cert-overlay i { font-size: 40px; color: var(--accent); }
+      .cert-body { padding: 18px 20px; }
+      .cert-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+      .cert-issuer { font-size: 13px; color: var(--accent); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+      .cert-date { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+
+      .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; display: none; align-items: center; justify-content: center; padding: 20px; }
+      .modal-overlay.active { display: flex; }
+      .modal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; max-width: 800px; width: 100%; overflow: hidden; position: relative; }
+      .modal-img { width: 100%; display: block; max-height: 70vh; object-fit: contain; background: #111; }
+      .modal-info { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+      .modal-title { font-size: 16px; font-weight: 700; color: #fff; }
+      .modal-issuer { font-size: 13px; color: var(--accent); margin-top: 2px; }
+      .modal-close { position: absolute; top: 12px; right: 16px; background: rgba(0,0,0,0.6); border: none; color: #fff; font-size: 20px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+      .modal-close:hover { background: var(--accent); color: #000; }
+
+      footer { background-color: var(--bg-header); border-top: 1px solid var(--border); text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px; }
+      footer span { color: var(--accent); }
+
+      @media (max-width: 600px) {
+        .cert-wrapper { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <div class="header-inner">
+        <div class="logo">Yusuf<span>.dev</span></div>
+        <nav>
+          <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Beranda</a>
+          <a href="{% url 'motivasi' %}"><i class="fas fa-lightbulb"></i> Motivasi</a>
+          <a href="{% url 'sertifikat' %}"><i class="fas fa-certificate"></i> Sertifikat</a>
+          <a href="{% url 'kontak' %}"><i class="fas fa-envelope"></i> Kontak</a>
+          <a href="{% url 'about' %}"><i class="fas fa-user"></i> Tentang Saya</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-hero">
+      <p class="section-title">Pencapaian</p>
+      <h1>Sertifikat Saya</h1>
+      <p>Kumpulan sertifikat dari pelatihan, kursus, dan kompetisi yang telah saya ikuti.</p>
+    </div>
+
+    <div class="cert-wrapper">
+
+      <div class="cert-card" onclick="bukaModal(this)"
+          data-img="{% static 'images/Sertifikat Robot car soccer.jpg' %}"
+          data-title="Sertifikat Robot car soccer"
+          data-issuer="HIMATIKA UMKT">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Robot car soccer.jpg' %}" alt="Sertifikat 1">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Robot car soccer</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> HIMATIKA UMKT</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)"
+          data-img="{% static 'images/Sertifikat workshop parallaxnet.png' %}"
+          data-title="Sertifikat workshop parallaxnet"
+          data-issuer="parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat workshop parallaxnet.png' %}" alt="Sertifikat 2">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">workshop Parallaxnet</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)"
+          data-img="{% static 'images/sertifikat3.jpg' %}"
+          data-title="Nama Sertifikat 3"
+          data-issuer="Nama Lembaga / Platform">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/sertifikat/sertifikat3.jpg' %}" alt="Sertifikat 3">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Nama Sertifikat 3</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Nama Lembaga / Platform</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> Bulan Tahun</div>
+        </div>
+      </div>
+
+      <!-- Duplikat card di atas untuk tambah sertifikat baru -->
+
+    </div>
+
+    <div class="modal-overlay" id="modal" onclick="tutupModal(event)">
+      <div class="modal-box">
+        <button class="modal-close" onclick="tutupModal()"><i class="fas fa-times"></i></button>
+        <img class="modal-img" id="modal-img" src="" alt="">
+        <div class="modal-info">
+          <div>
+            <div class="modal-title" id="modal-title"></div>
+            <div class="modal-issuer" id="modal-issuer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <span>Muhammad Yusuf Syahputra</span>.
+    </footer>
+
+    <script>
+      function bukaModal(card) {
+        document.getElementById('modal-img').src = card.dataset.img;
+        document.getElementById('modal-title').textContent = card.dataset.title;
+        document.getElementById('modal-issuer').textContent = card.dataset.issuer;
+        document.getElementById('modal').classList.add('active');
+      }
+      function tutupModal(e) {
+        if (!e || e.target === document.getElementById('modal') || e.currentTarget.classList.contains('modal-close')) {
+          document.getElementById('modal').classList.remove('active');
+        }
+      }
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupModal(); });
+    </script>
+
+  </body>
+  </html>

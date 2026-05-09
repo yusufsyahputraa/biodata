@@ -1,315 +1,224 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Tentang Saya</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  {% load static %}
+  <!DOCTYPE html>
+  <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tentang Saya</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --accent: #00e0b7;
+        --accent-dim: rgba(0, 224, 183, 0.15);
+        --bg: #0d0d0d;
+        --bg-card: #1a1a1a;
+        --bg-header: #111111;
+        --text: #e0e0e0;
+        --text-muted: #888;
+        --border: #2a2a2a;
+      }
+      body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
-    line-height: 1.6;
-  }
+      /* HEADER */
+      header { background-color: var(--bg-header); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+      .header-inner { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
+      .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+      .logo span { color: var(--text); font-weight: 300; }
+      nav a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: 14px; font-weight: 500; transition: color 0.2s; position: relative; }
+      nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+      nav a:hover { color: var(--accent); }
+      nav a:hover::after { width: 100%; }
 
-  header {
-    background-color: #333;
-    padding: 20px 0;
-    border-bottom: 1px solid #333;
-  }
+      /* PAGE HEADER */
+      .page-hero { width: 90%; max-width: 1100px; margin: 60px auto 40px; }
+      .page-hero .section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+      .page-hero h1 { font-size: 36px; font-weight: 700; color: #fff; }
 
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+      /* WRAPPER */
+      .wrapper { width: 90%; max-width: 1100px; margin: 0 auto 80px; display: flex; flex-direction: column; gap: 60px; }
 
-  header h1 {
-    font-size: 22px;
-    color: #00e0b7;
-    margin-bottom: 10px;
-  }
+      /* BIODATA */
+      .biodata-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; }
+      .biodata-photo img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); display: block; }
+      .biodata-info { flex: 1; min-width: 200px; }
+      .biodata-info h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+      .biodata-info .subtitle { color: var(--accent); font-size: 14px; margin-bottom: 16px; }
+      .info-table { width: 100%; border-collapse: collapse; }
+      .info-table tr td { padding: 6px 0; font-size: 14px; color: var(--text-muted); vertical-align: top; }
+      .info-table tr td:first-child { color: var(--text); font-weight: 600; width: 130px; white-space: nowrap; }
+      .info-table tr td:nth-child(2) { color: var(--text-muted); padding: 0 8px; }
 
-  nav a {
-    color: #bbb;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 16px;
-    transition: color 0.3s ease;
-  }
+      /* SECTION */
+      .section-label { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+      .section-heading { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 24px; }
 
-  nav a:hover {
-    color: #00e0b7;
-  }
+      /* TIMELINE */
+      .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 28px; }
+      .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+      .timeline-item { position: relative; padding: 0 0 28px 24px; }
+      .timeline-item:last-child { padding-bottom: 0; }
+      .timeline-item::before { content: ''; position: absolute; left: -21px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+      .timeline-item .year { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+      .timeline-item h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+      .timeline-item p { font-size: 14px; color: var(--text-muted); }
 
-  .content {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
+      /* EXPERIENCE CARDS */
+      .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+      .exp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.3s, transform 0.2s; }
+      .exp-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+      .exp-card .exp-icon { font-size: 24px; color: var(--accent); margin-bottom: 12px; }
+      .exp-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-  .profile {
-    text-align: center;
-    margin-bottom: 30px;
-  }
+      /* HOBI CARDS */
+      .hobi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+      .hobi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.3s, transform 0.2s; }
+      .hobi-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+      .hobi-card .hobi-icon { font-size: 28px; margin-bottom: 12px; }
+      .hobi-card h4 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+      .hobi-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
 
-  .foto-profil {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #00e0b7;
-    margin-bottom: 20px;
-  }
+      footer { background-color: var(--bg-header); border-top: 1px solid var(--border); text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px; }
+      footer span { color: var(--accent); }
 
-  .typewriter {
-    color: #00e0b7;
-    font-size: 24px;
-    border-right: 2px solid #00e0b7;
-    white-space: nowrap;
-    overflow: hidden;
-    display: inline-block;
-    animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
-  }
+      @media (max-width: 600px) {
+        .biodata-card { flex-direction: column; text-align: center; }
+        .biodata-photo img { margin: 0 auto; }
+      }
+    </style>
+  </head>
+  <body>
 
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: #00e0b7 }
-  }
-
-  .intro p {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-
-  footer {
-    background-color: #1f1f1f;
-    text-align: center;
-    padding: 20px 0;
-    color: #888;
-    font-size: 14px;
-    margin-top: 40px;
-  }
-
-  table td {
-    text-align: justify;
-  }
-
-  /* HOBI STYLING */
-  .hobi-container {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .hobi-item {
-    display: flex;
-    align-items: center;
-    background-color: #1e1e1e;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(255,255,255,0.1);
-    transition: transform 0.3s ease;
-  }
-
-  .hobi-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px rgba(255,255,255,0.2);
-  }
-
-  .hobi-text {
-    padding: 0 20px;
-    color: #e0e0e0;
-    text-align: justify;
-  }
-
-  .hobi-text h5 {
-    color: #00e0b7;
-    margin-bottom: 10px;
-  }
-
-  .hobi-item.even {
-    flex-direction: row-reverse;
-  }
-</style>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <h1>Selamat Datang di Website Saya</h1>
-      <nav>
-        <a href="{% url 'dashboard'%}">Beranda</a>
-        <a href="{% url 'motivasi' %}">Motivasi</a>
-        <a href="{% url 'kontak'%}">Kontak</a>
-        <a href="{% url 'about'%}">Tentang Saya</a>
-      </nav>
-    </div>
-  </header>
-
-<!-- CONTENT -->
-<div class="container mt-5">
-
-<!-- Biodata -->
-<section id="biodata" class="mb-5">
-  <h2>Profil Saya</h2>
-  <div class="row align-items-center text-center">
-    <div class="col-md-3">
-      <img src="{% static 'images/foto-profil.jpeg' %}" class="img-thumbnail" alt="Foto Saya">
-    </div>
-    <div class="col-md-9 text-start">
-      <table class="table-no-border">
-        <tr>
-          <th>Nama</th>
-          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Muhammad Yusuf Syahputra</td>
-        </tr>
-        <tr>
-          <th>Tanggal Lahir</th>
-          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Sangatta, 28 Juni 2005</td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>&nbsp;&nbsp;:&nbsp;&nbsp; myusuf28062005@gmail.com</td>
-        </tr>
-        <tr>
-          <th>Alamat</th>
-          <td>&nbsp;&nbsp;:&nbsp;&nbsp; Jl. Diponegoro Gg. Taruna 5 No. 119 Rt.10 Sangatta Utara</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- Pendidikan -->
-<section id="pendidikan" class="mb-5">
-  <h2 class="section-title text-left mb-4">Pendidikan</h2>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>2017 - 2020</h5>
-        <p>SMP YPPSB Prima School</p>
+    <!-- HEADER -->
+    <header>
+      <div class="header-inner">
+        <div class="logo">Yusuf<span>.dev</span></div>
+        <nav>
+          <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Beranda</a>
+          <a href="{% url 'motivasi' %}"><i class="fas fa-lightbulb"></i> Motivasi</a>
+          <a href="{% url 'sertifikat' %}"><i class="fas fa-certificate"></i> Sertifikat</a>
+          <a href="{% url 'kontak' %}"><i class="fas fa-envelope"></i> Kontak</a>
+          <a href="{% url 'about' %}"><i class="fas fa-user"></i> Tentang Saya</a>
+        </nav>
       </div>
-    </div>
-  </div>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>2020 - 2023</h5>
-        <p>SMK Negeri 1 Sangatta Utara</p>
-      </div>
-    </div>
-  </div>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>2023 - Sekarang</h5>
-        <p>Universitas Muhammadiyah Kalimantan Timur</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </header>
 
-<!-- pengalaman -->
-<section id="pengalaman" class="mb-5">
-  <h2 class="section-title text-left mb-4">Pengalaman</h2>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <p>Praktik kerja lapangan di DPRD Kutai Timur</p>
-      </div>
-    </div>
-  </div>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <p>Praktik kerja lapangan di TVRI Kalimantan Timur</p>
-      </div>
-    </div>
-  </div>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <p>Kompeten dalam Uji sertifikasi kompetensi Teknik Komputer Jaringan</p>
-      </div>
-    </div>
-  </div>
-  <div class="hobi-container">
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <p>Sertifikat berpartisipasi Robot Car Soccer di HIMATIKA FESTIVAL 2024</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Hobi -->
-<section id="hobi" class="mb-5">
-  <h2 class="section-title text-left mb-4">Hobi</h2>
-  <div class="hobi-container">
-
-    <!-- Badminton -->
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>Badminton</h5>
-        <p>Badminton merupakan salah satu hobi yang saya tekuni secara rutin di waktu luang.
-        Selain sebagai bentuk olahraga yang menyenangkan, badminton juga memberikan banyak manfaat positif bagi kesehatan fisik dan mental. 
-        Melalui olahraga ini, saya belajar untuk lebih disiplin, meningkatkan fokus, serta melatih daya tahan tubuh.</p>
-      </div>
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <p class="section-title">Profil</p>
+      <h1>Tentang Saya</h1>
     </div>
 
-    <!-- Coding -->
-    <div class="hobi-item even">
-      <div class="hobi-text">
-        <h5>Coding</h5>
-        <p>Saya memiliki minat yang besar terhadap dunia teknologi informasi, khususnya dalam bidang pemrograman. 
-        Kegiatan ini saya lakukan secara konsisten di waktu luang sebagai bentuk pengembangan diri sekaligus latihan berpikir logis.
-        Hobi ini telah membantu saya mengembangkan keterampilan teknis dan memperluas wawasan digital.</p>
+    <div class="wrapper">
+
+      <!-- BIODATA -->
+      <div class="biodata-card">
+        <div class="biodata-photo">
+          <img src="{% static 'images/foto-profil.jpeg' %}" alt="Foto Profil">
+        </div>
+        <div class="biodata-info">
+          <h2>Muhammad Yusuf Syahputra</h2>
+          <p class="subtitle">IT Student · Network Enthusiast · Web Developer</p>
+          <table class="info-table">
+            <tr>
+              <td>Tanggal Lahir</td>
+              <td>:</td>
+              <td>Sangatta, 28 Juni 2005</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>:</td>
+              <td>myusuf28062005@gmail.com</td>
+            </tr>
+            <tr>
+              <td>Alamat</td>
+              <td>:</td>
+              <td>Jl. Diponegoro Gg. Taruna 5 No. 119 Rt.10, Sangatta Utara</td>
+            </tr>
+          </table>
+        </div>
       </div>
+
+      <!-- PENDIDIKAN -->
+      <div>
+        <p class="section-label">Riwayat</p>
+        <h2 class="section-heading">Pendidikan</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="year">2017 – 2020</div>
+            <h4>SMP YPPSB Prima School</h4>
+            <p>Sangatta, Kutai Timur</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2020 – 2023</div>
+            <h4>SMK Negeri 1 Sangatta Utara</h4>
+            <p>Teknik Komputer dan Jaringan</p>
+          </div>
+          <div class="timeline-item">
+            <div class="year">2023 – Sekarang</div>
+            <h4>Universitas Muhammadiyah Kalimantan Timur</h4>
+            <p>Teknik Informatika</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENGALAMAN -->
+      <div>
+        <p class="section-label">Portofolio</p>
+        <h2 class="section-heading">Pengalaman</h2>
+        <div class="exp-grid">
+          <div class="exp-card">
+            <div class="exp-icon"><i class="fas fa-landmark"></i></div>
+            <p>Praktik kerja lapangan di <strong style="color:#fff">DPRD Kutai Timur</strong></p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon"><i class="fas fa-tv"></i></div>
+            <p>Praktik kerja lapangan di <strong style="color:#fff">TVRI Kalimantan Timur</strong></p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon"><i class="fas fa-certificate"></i></div>
+            <p>Kompeten dalam <strong style="color:#fff">Uji Sertifikasi Teknik Komputer Jaringan</strong></p>
+          </div>
+          <div class="exp-card">
+            <div class="exp-icon"><i class="fas fa-robot"></i></div>
+            <p>Sertifikat partisipasi <strong style="color:#fff">Robot Car Soccer – HIMATIKA FESTIVAL 2024</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOBI -->
+      <div>
+        <p class="section-label">Keseharian</p>
+        <h2 class="section-heading">Hobi</h2>
+        <div class="hobi-grid">
+          <div class="hobi-card">
+            <div class="hobi-icon">🏸</div>
+            <h4>Badminton</h4>
+            <p>Olahraga rutin yang melatih disiplin, fokus, dan daya tahan tubuh. Selain menyehatkan, badminton juga menjadi sarana relaksasi dan sosialisasi.</p>
+          </div>
+          <div class="hobi-card">
+            <div class="hobi-icon">💻</div>
+            <h4>Coding</h4>
+            <p>Mengembangkan keterampilan teknis melalui pemrograman secara konsisten. Melatih logika berpikir dan kemampuan memecahkan masalah secara kreatif.</p>
+          </div>
+          <div class="hobi-card">
+            <div class="hobi-icon">🌐</div>
+            <h4>Jaringan Komputer</h4>
+            <p>Mendalami instalasi, konfigurasi, dan troubleshooting jaringan LAN. Familiar dengan router, switch, dan dasar-dasar keamanan jaringan.</p>
+          </div>
+          <div class="hobi-card">
+            <div class="hobi-icon">🎮</div>
+            <h4>Bermain Game</h4>
+            <p>Melatih strategi, pengambilan keputusan, dan kerja sama tim. Game juga memperdalam minat terhadap teknologi dan desain interaktif.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Jaringan Komputer -->
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>Jaringan Komputer</h5>
-        <p>Saya memiliki keahlian dasar di bidang jaringan komputer, termasuk instalasi, konfigurasi, dan troubleshooting sistem jaringan lokal (LAN). 
-        Saya juga memahami perangkat seperti router dan switch, serta dasar keamanan jaringan.
-        Minat ini saya kembangkan melalui praktik langsung dan pembelajaran mandiri.</p>
-      </div>
-    </div>
+    <footer>
+      <span>Muhammad Yusuf Syahputra</span>.
+    </footer>
 
-    <!-- Bermain game -->
-    <div class="hobi-item">
-      <div class="hobi-text">
-        <h5>Bermain Game</h5>
-        <p>Bermain game adalah salah satu hobi yang saya gemari karena tidak hanya memberikan hiburan, 
-          tetapi juga melatih kemampuan berpikir strategis, pengambilan keputusan, dan konsentrasi. 
-          Melalui berbagai jenis permainan, saya belajar bagaimana bekerja sama dalam tim, mengatur strategi, 
-          serta menghadapi tantangan secara kreatif dan efisien. 
-          Selain itu, game juga memperkenalkan saya pada dunia teknologi dan desain interaktif, 
-          yang semakin memperdalam minat saya terhadap perkembangan industri digital. 
-          Bagi saya, bermain game bukan sekadar aktivitas mengisi waktu luang, tetapi juga cara untuk mengasah 
-          keterampilan dan menjalin relasi sosial secara positif.</p>
-      </div>
-    </div>
-  </div>
-</section>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+  </body>
+  </html>

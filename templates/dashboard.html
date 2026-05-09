@@ -5,152 +5,171 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Website Saya</title>
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --accent: #00e0b7;
+      --accent-dim: rgba(0, 224, 183, 0.15);
+      --bg: #0d0d0d;
+      --bg-card: #1a1a1a;
+      --bg-header: #111111;
+      --text: #e0e0e0;
+      --text-muted: #888;
+      --border: #2a2a2a;
     }
+    body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
+    header { background-color: var(--bg-header); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .header-inner { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
+    .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .logo span { color: var(--text); font-weight: 300; }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: 14px; font-weight: 500; transition: color 0.2s; position: relative; }
+    nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+    nav a:hover { color: var(--accent); }
+    nav a:hover::after { width: 100%; }
 
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      line-height: 1.6;
+    /* HERO */
+    .hero { width: 90%; max-width: 1100px; margin: 80px auto 60px; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+    .hero-photo { flex-shrink: 0; position: relative; }
+    .hero-photo::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; background: conic-gradient(var(--accent), transparent, var(--accent)); animation: spin 4s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .hero-photo img { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); position: relative; z-index: 1; display: block; }
+    .hero-text { flex: 1; min-width: 260px; }
+    .greeting { font-size: 14px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
+    .hero-text h1 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; color: #fff; }
+    .typewriter-wrap { font-size: 18px; color: var(--accent); margin-bottom: 20px; min-height: 28px; }
+    .typewriter { border-right: 2px solid var(--accent); animation: blink-caret 0.7s step-end infinite; }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
+    .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 480px; line-height: 1.8; margin-bottom: 28px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn { padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary { background: var(--accent); color: #0d0d0d; }
+    .btn-primary:hover { background: #00c9a5; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+    .btn-outline:hover { background: var(--accent-dim); transform: translateY(-2px); }
+
+    /* STATS */
+    .stats { width: 90%; max-width: 1100px; margin: 0 auto 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .stat-icon { font-size: 28px; color: var(--accent); margin-bottom: 10px; }
+    .stat-number { font-size: 32px; font-weight: 700; color: #fff; }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* SECTION */
+    .section { width: 90%; max-width: 1100px; margin: 0 auto 60px; }
+    .section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+    .section-heading { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 24px; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.3s, transform 0.2s; }
+    .about-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .about-card h3 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .about-card h3 i { color: var(--accent); }
+    .about-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,224,183,0.3); border-radius: 20px; padding: 6px 16px; font-size: 13px; font-weight: 500; }
+
+    footer { background-color: var(--bg-header); border-top: 1px solid var(--border); text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px; }
+    footer span { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .hero { gap: 32px; }
+      .hero-text h1 { font-size: 30px; }
     }
-
-    header {
-      background-color: #333;
-      padding: 20px 0;
-      border-bottom: 1px solid #333;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    header h1 {
-      font-size: 22px;
-      color: #00e0b7;
-      margin-bottom: 10px;
-    }
-
-    nav a {
-      color: #bbb;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #00e0b7;
-    }
-
-    .content {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
-    .profile {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .img-thumbnail {
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #00e0b7;
-      margin-bottom: 20px;
-    }
-
-
-    .typewriter {
-      color: #00e0b7;
-      font-size: 24px;
-      border-right: 2px solid #00e0b7;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-      animation: typing 3s steps(40, end), blink-caret 0.7s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #00e0b7 }
-    }
-
-    .intro p {
-      font-size: 16px;
-      margin-bottom: 16px;
-    }
-
-    footer {
-      background-color: #1f1f1f;
-      text-align: center;
-      padding: 20px 0;
-      color: #888;
-      font-size: 14px;
-      margin-top: 40px;
-    }
-    
   </style>
 </head>
 <body>
+
   <header>
-    <div class="container">
-      <h1>Selamat Datang, di Website Saya</h1>
+    <div class="header-inner">
+      <div class="logo">Yusuf<span>.dev</span></div>
       <nav>
-        <a href="{% url 'dashboard'%}">Beranda</a>
-        <a href="{% url 'motivasi'%}">Motivasi</a>
-        <a href="{% url 'kontak'%}">Kontak</a>
-        <a href="{% url 'about' %}">Tentang Saya</a>
+        <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Beranda</a>
+        <a href="{% url 'motivasi' %}"><i class="fas fa-lightbulb"></i> Motivasi</a>
+        <a href="{% url 'sertifikat' %}"><i class="fas fa-certificate"></i> Sertifikat</a>
+        <a href="{% url 'kontak' %}"><i class="fas fa-envelope"></i> Kontak</a>
+        <a href="{% url 'about' %}"><i class="fas fa-user"></i> Tentang Saya</a>
       </nav>
     </div>
   </header>
 
-  <main class="content">
-    <section class="profile">
-      <img src="{% static 'images/foto-saya.jpg' %}" class="img-thumbnail" alt="Foto Saya">
-      <h2><span class="typewriter"></span></h2>
-    </section>
+  <section class="hero">
+    <div class="hero-photo">
+      <img src="{% static 'images/foto-saya.jpg' %}" alt="Foto Yusuf">
+    </div>
+    <div class="hero-text">
+      <p class="greeting">Selamat Datang di Website Saya</p>
+      <h1>Muhammad Yusuf<br>Syahputra</h1>
+      <div class="typewriter-wrap"><span class="typewriter"></span></div>
+      <p class="hero-desc">Seorang yang memiliki ketertarikan kuat di bidang teknologi, khususnya jaringan komputer, pemrograman, dan pengembangan sistem digital.</p>
+      <div class="hero-btns">
+        <a href="{% url 'about' %}" class="btn btn-primary"><i class="fas fa-user"></i> Tentang Saya</a>
+        <a href="{% url 'kontak' %}" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Hubungi Saya</a>
+      </div>
+    </div>
+  </section>
 
-    <section class="intro">
-      <p>Saya adalah seseorang yang memiliki ketertarikan kuat di bidang teknologi, khususnya jaringan komputer, pemrograman, dan pengembangan sistem digital. Website ini saya buat sebagai wadah untuk menampilkan karya, pengalaman, dan perjalanan saya dalam dunia IT yang terus berkembang.</p>
-      <p>Di sini, Anda akan menemukan informasi tentang hobi produktif, proyek-proyek yang pernah saya kerjakan, serta kemampuan teknis yang telah saya pelajari, baik secara mandiri maupun dari pengalaman langsung di lapangan.</p>
-    </section>
-  </main>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-icon"><i class="fas fa-code"></i></div><div class="stat-number">3+</div><div class="stat-label">Tahun Belajar IT</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fas fa-project-diagram"></i></div><div class="stat-number">10+</div><div class="stat-label">Proyek Selesai</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fas fa-certificate"></i></div><div class="stat-number">5+</div><div class="stat-label">Sertifikasi</div></div>
+    <div class="stat-card"><div class="stat-icon"><i class="fas fa-briefcase"></i></div><div class="stat-number">2</div><div class="stat-label">Pengalaman Kerja</div></div>
+  </div>
 
+  <section class="section">
+    <p class="section-title">Tentang</p>
+    <h2 class="section-heading">Yang Saya Kuasai</h2>
+    <div class="about-grid">
+      <div class="about-card"><h3><i class="fas fa-network-wired"></i> Jaringan Komputer</h3><p>Berpengalaman dalam konfigurasi jaringan, troubleshooting, dan instalasi infrastruktur IT di lingkungan profesional.</p></div>
+      <div class="about-card"><h3><i class="fas fa-laptop-code"></i> Pemrograman</h3><p>Mengembangkan aplikasi web menggunakan Python, Django, HTML, CSS, dan JavaScript untuk berbagai kebutuhan digital.</p></div>
+      <div class="about-card"><h3><i class="fas fa-database"></i> Database</h3><p>Familiar dengan pengelolaan database menggunakan PostgreSQL dan Supabase untuk aplikasi skala kecil hingga menengah.</p></div>
+      <div class="about-card"><h3><i class="fas fa-tools"></i> Pengalaman Lapangan</h3><p>Praktik kerja di DPRD Kutai Timur dan TVRI Kalimantan Timur memberikan pengalaman nyata di dunia kerja IT.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <p class="section-title">Teknologi</p>
+    <h2 class="section-heading">Favorite</h2>
+    <div class="skills-list">
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Django</span>
+      <span class="skill-tag">HTML & CSS</span>
+      <span class="skill-tag">PostgreSQL</span>
+      <span class="skill-tag">Visual Studio Code</span>
+      <span class="skill-tag">Git</span>
+      <span class="skill-tag">Virtual Machine</span>
+      <span class="skill-tag">Jaringan Komputer</span>
+      <span class="skill-tag">Cisco Packet Tracer</span>
+      <span class="skill-tag">Winbox</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>Muhammad Yusuf Syahputra</span>.
+  </footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const teks = "Halo! Terima kasih telah mengunjungi halaman Website saya.";
+      const teks = ["Network Engineer 🌐", "Web Developer 💻", "Python Enthusiast 🐍", "IT Student 🎓"];
       const target = document.querySelector(".typewriter");
+      let teksIndex = 0, charIndex = 0, isDeleting = false;
 
-      let i = 0;
       function ketik() {
-        if (i < teks.length) {
-          target.textContent += teks.charAt(i);
-          i++;
-          setTimeout(ketik, 50);
+        const current = teks[teksIndex];
+        if (isDeleting) { target.textContent = current.substring(0, charIndex - 1); charIndex--; }
+        else { target.textContent = current.substring(0, charIndex + 1); charIndex++; }
+
+        if (!isDeleting && charIndex === current.length) {
+          setTimeout(() => { isDeleting = true; setTimeout(ketik, 100); }, 1500);
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          teksIndex = (teksIndex + 1) % teks.length;
+          setTimeout(ketik, 300);
+        } else {
+          setTimeout(ketik, isDeleting ? 40 : 70);
         }
       }
-
       ketik();
     });
   </script>
