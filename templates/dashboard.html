@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Website Saya</title>
+  <title>PORTOFOLIO - Portfolio Lengkap</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,22 +18,24 @@
       --text-muted: #888;
       --border: #2a2a2a;
     }
+    html { scroll-behavior: smooth; }
     body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; }
     header { background-color: var(--bg-header); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .header-inner { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 16px 0; flex-wrap: wrap; gap: 12px; }
-    .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+    .logo { font-size: 20px; font-weight: 700; color: var(--accent); cursor: pointer; }
     .logo span { color: var(--text); font-weight: 300; }
-    nav a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: 14px; font-weight: 500; transition: color 0.2s; position: relative; }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 24px; font-size: 14px; font-weight: 500; transition: color 0.2s; position: relative; cursor: pointer; }
     nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
-    nav a:hover { color: var(--accent); }
-    nav a:hover::after { width: 100%; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav a:hover::after, nav a.active::after { width: 100%; }
 
     /* HERO */
-    .hero { width: 90%; max-width: 1100px; margin: 80px auto 60px; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
+    section { scroll-margin-top: 60px; }
+    section#hero { width: 90%; max-width: 1100px; margin: 80px auto 60px; display: flex; align-items: center; gap: 60px; flex-wrap: wrap; }
     .hero-photo { flex-shrink: 0; position: relative; }
     .hero-photo::before { content: ''; position: absolute; inset: -6px; border-radius: 50%; background: conic-gradient(var(--accent), transparent, var(--accent)); animation: spin 4s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .hero-photo img { width: 450px; height: 450px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); position: relative; z-index: 1; display: block; }
+    .hero-photo img { width: 450px; height: 450px; border-radius: 50%; object-fit: cover; border: 4px solid var(--bg); position: relative; z-index: 1; display: block; perspective: 1000px; }
     .hero-text { flex: 1; min-width: 260px; }
     .greeting { font-size: 14px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; font-weight: 600; }
     .hero-text h1 { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; color: #fff; }
@@ -42,14 +44,14 @@
     @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent) } }
     .hero-desc { font-size: 15px; color: var(--text-muted); max-width: 480px; line-height: 1.8; margin-bottom: 28px; }
     .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn { padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn { padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none; }
     .btn-primary { background: var(--accent); color: #0d0d0d; }
     .btn-primary:hover { background: #00c9a5; transform: translateY(-2px); }
     .btn-outline { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
     .btn-outline:hover { background: var(--accent-dim); transform: translateY(-2px); }
 
     /* STATS */
-    .stats { width: 90%; max-width: 1100px; margin: 0 auto 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+    section#stats { width: 90%; max-width: 1100px; margin: 0 auto 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
     .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; transition: border-color 0.3s, transform 0.2s; }
     .stat-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .stat-icon { font-size: 28px; color: var(--accent); margin-bottom: 10px; }
@@ -57,7 +59,7 @@
     .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
 
     /* SECTION */
-    .section { width: 90%; max-width: 1100px; margin: 0 auto 60px; }
+    .section-wrapper { width: 90%; max-width: 1100px; margin: 0 auto 60px; }
     .section-title { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
     .section-heading { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 24px; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -69,13 +71,117 @@
     .skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
     .skill-tag { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(0,224,183,0.3); border-radius: 20px; padding: 6px 16px; font-size: 13px; font-weight: 500; }
 
+    /* MOTIVASI */
+    .quotes-wrapper { display: flex; flex-direction: column; gap: 20px; }
+    .quote-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; gap: 28px; transition: border-color 0.3s, transform 0.2s; }
+    .quote-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .quote-card.reverse { flex-direction: row-reverse; }
+    .quote-photo { flex-shrink: 0; }
+    .quote-photo img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); display: block; }
+    .quote-body { flex: 1; }
+    .quote-name { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
+    .quote-text { font-size: 16px; color: var(--text); font-style: italic; margin-bottom: 10px; line-height: 1.7; position: relative; padding-left: 16px; }
+    .quote-text::before { content: '"'; position: absolute; left: 0; top: -4px; font-size: 32px; color: var(--accent); opacity: 0.4; line-height: 1; }
+    .quote-dates { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .quote-number { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-dim); border: 1px solid rgba(0,224,183,0.3); color: var(--accent); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* SERTIFIKAT */
+    .cert-wrapper { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .cert-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: border-color 0.3s, transform 0.2s; cursor: pointer; }
+    .cert-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .cert-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/3; background: #111; }
+    .cert-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .cert-card:hover .cert-img-wrap img { transform: scale(1.05); }
+    .cert-overlay { position: absolute; inset: 0; background: rgba(0,224,183,0.15); opacity: 0; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s; }
+    .cert-card:hover .cert-overlay { opacity: 1; }
+    .cert-overlay i { font-size: 40px; color: var(--accent); }
+    .cert-body { padding: 18px 20px; }
+    .cert-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .cert-issuer { font-size: 13px; color: var(--accent); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+    .cert-date { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 999; display: none; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; max-width: 800px; width: 100%; overflow: hidden; position: relative; }
+    .modal-img { width: 100%; display: block; max-height: 70vh; object-fit: contain; background: #111; }
+    .modal-info { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .modal-title { font-size: 16px; font-weight: 700; color: #fff; }
+    .modal-issuer { font-size: 13px; color: var(--accent); margin-top: 2px; }
+    .modal-close { position: absolute; top: 12px; right: 16px; background: rgba(0,0,0,0.6); border: none; color: #fff; font-size: 20px; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .modal-close:hover { background: var(--accent); color: #000; }
+
+    /* KONTAK */
+    .contact-main { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
+    .form-card h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .form-card h2 i { color: var(--accent); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 12px 14px; background: #111; border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 14px; font-family: inherit; transition: border-color 0.2s, background 0.2s; resize: none; }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: #161616; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-muted); }
+    .btn-submit { width: 100%; padding: 13px; background: var(--accent); color: #0d0d0d; font-size: 15px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: #00c9a5; transform: translateY(-2px); }
+    .info-col { display: flex; flex-direction: column; gap: 16px; }
+    .info-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+    .info-card h2 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .info-card h2 i { color: var(--accent); }
+    .contact-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .contact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .contact-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--accent-dim); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 16px; flex-shrink: 0; }
+    .contact-detail { flex: 1; }
+    .contact-detail .label { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+    .contact-detail a { font-size: 14px; color: var(--text); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .contact-detail a:hover { color: var(--accent); }
+
+    /* TENTANG */
+    .biodata-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; display: flex; gap: 40px; align-items: center; flex-wrap: wrap; margin-bottom: 60px; }
+    .biodata-photo img { width: 300px; height: 300px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); display: block; }
+    .biodata-info { flex: 1; min-width: 200px; }
+    .biodata-info h2 { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .biodata-info .subtitle { color: var(--accent); font-size: 14px; margin-bottom: 16px; }
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr td { padding: 6px 0; font-size: 14px; color: var(--text-muted); vertical-align: top; }
+    .info-table tr td:first-child { color: var(--text); font-weight: 600; width: 130px; white-space: nowrap; }
+    .timeline { display: flex; flex-direction: column; gap: 0; position: relative; padding-left: 28px; }
+    .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+    .timeline-item { position: relative; padding: 0 0 28px 24px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; left: -21px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+    .timeline-item .year { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .timeline-item h4 { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px; }
+    .timeline-item p { font-size: 14px; color: var(--text-muted); }
+    .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .exp-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.3s, transform 0.2s; }
+    .exp-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .exp-card .exp-icon { font-size: 24px; color: var(--accent); margin-bottom: 12px; }
+    .exp-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .hobi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .hobi-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: border-color 0.3s, transform 0.2s; }
+    .hobi-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .hobi-card .hobi-icon { font-size: 28px; margin-bottom: 12px; }
+    .hobi-card h4 { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .hobi-card p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
     footer { background-color: var(--bg-header); border-top: 1px solid var(--border); text-align: center; padding: 24px; color: var(--text-muted); font-size: 13px; }
     footer span { color: var(--accent); }
 
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
+      .contact-main { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; }
-      .hero { gap: 32px; }
+      .quote-card, .quote-card.reverse { flex-direction: column; text-align: center; }
+      .quote-text { padding-left: 0; }
+      .quote-text::before { display: none; }
+      .biodata-card { flex-direction: column; text-align: center; }
+      .biodata-photo img { margin: 0 auto; }
+      nav a { margin-left: 12px; font-size: 13px; }
+    }
+    @media (max-width: 600px) {
+      section#hero { gap: 32px; }
       .hero-text h1 { font-size: 30px; }
+      .hero-photo img { width: 300px; height: 300px; }
+      .cert-wrapper { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -83,18 +189,19 @@
 
   <header>
     <div class="header-inner">
-      <div class="logo">Yusuf<span>.dev</span></div>
+      <div class="logo" onclick="scrollToSection('hero')">PORTO<span>FOLIO</span></div>
       <nav>
-        <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Beranda</a>
-        <a href="{% url 'motivasi' %}"><i class="fas fa-lightbulb"></i> Motivasi</a>
-        <a href="{% url 'sertifikat' %}"><i class="fas fa-certificate"></i> Sertifikat</a>
-        <a href="{% url 'kontak' %}"><i class="fas fa-envelope"></i> Kontak</a>
-        <a href="{% url 'about' %}"><i class="fas fa-user"></i> Tentang Saya</a>
+        <a onclick="scrollToSection('hero')" class="active"><i class="fas fa-home"></i> Beranda</a>
+        <a onclick="scrollToSection('tentang')"><i class="fas fa-user"></i> Tentang</a>
+        <a onclick="scrollToSection('motivasi')"><i class="fas fa-lightbulb"></i> Motivasi</a>
+        <a onclick="scrollToSection('sertifikat')"><i class="fas fa-certificate"></i> Sertifikat</a>
+        <a onclick="scrollToSection('kontak')"><i class="fas fa-envelope"></i> Kontak</a>
       </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <!-- HERO SECTION -->
+  <section id="hero">
     <div class="hero-photo">
       <img src="{% static 'images/foto-saya.jpg' %}" alt="Foto Yusuf">
     </div>
@@ -104,52 +211,480 @@
       <div class="typewriter-wrap"><span class="typewriter"></span></div>
       <p class="hero-desc">Seorang yang memiliki ketertarikan kuat di bidang teknologi, khususnya jaringan komputer, pemrograman, dan pengembangan sistem digital.</p>
       <div class="hero-btns">
-        <a href="{% url 'about' %}" class="btn btn-primary"><i class="fas fa-user"></i> Tentang Saya</a>
-        <a href="{% url 'kontak' %}" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Hubungi Saya</a>
+        <a onclick="scrollToSection('tentang')" class="btn btn-primary"><i class="fas fa-user"></i> Tentang Saya</a>
+        <a onclick="scrollToSection('kontak')" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Hubungi Saya</a>
       </div>
     </div>
   </section>
 
-  <div class="stats">
+  <!-- STATS SECTION -->
+  <section id="stats">
     <div class="stat-card"><div class="stat-icon"><i class="fas fa-code"></i></div><div class="stat-number">3+</div><div class="stat-label">Tahun Belajar IT</div></div>
     <div class="stat-card"><div class="stat-icon"><i class="fas fa-project-diagram"></i></div><div class="stat-number">10+</div><div class="stat-label">Proyek Selesai</div></div>
     <div class="stat-card"><div class="stat-icon"><i class="fas fa-certificate"></i></div><div class="stat-number">5+</div><div class="stat-label">Sertifikasi</div></div>
     <div class="stat-card"><div class="stat-icon"><i class="fas fa-briefcase"></i></div><div class="stat-number">2</div><div class="stat-label">Pengalaman Kerja</div></div>
+  </section>
+
+  <!-- TENTANG SECTION -->
+  <section id="tentang" class="section-wrapper">
+    <p class="section-title">Profil</p>
+    <h2 class="section-heading">Tentang Saya</h2>
+    
+    <div class="biodata-card">
+      <div class="biodata-photo">
+        <img src="{% static 'images/foto-profil.jpeg' %}" alt="Foto Profil">
+      </div>
+      <div class="biodata-info">
+        <h2>Muhammad Yusuf Syahputra</h2>
+        <p class="subtitle">IT Student · Network Enthusiast · Web Developer</p>
+        <table class="info-table">
+          <tr>
+            <td>Tanggal Lahir</td>
+            <td>:</td>
+            <td>Sangatta, 28 Juni 2005</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td>myusuf28062005@gmail.com</td>
+          </tr>
+          <tr>
+            <td>Alamat</td>
+            <td>:</td>
+            <td>Jl. Diponegoro Gg. Taruna 5 No. 119 Rt.10, Sangatta Utara</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 60px;">
+      <p class="section-title">Riwayat</p>
+      <h2 class="section-heading">Pendidikan</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="year">2017 – 2020</div>
+          <h4>SMP YPPSB Prima School</h4>
+          <p>Sangatta, Kutai Timur</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2020 – 2023</div>
+          <h4>SMK Negeri 1 Sangatta Utara</h4>
+          <p>Teknik Komputer dan Jaringan</p>
+        </div>
+        <div class="timeline-item">
+          <div class="year">2023 – Sekarang</div>
+          <h4>Universitas Muhammadiyah Kalimantan Timur</h4>
+          <p>Teknik Informatika</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 60px;">
+      <p class="section-title">Portofolio</p>
+      <h2 class="section-heading">Pengalaman</h2>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="exp-icon"><i class="fas fa-landmark"></i></div>
+          <p>Praktik kerja lapangan di <strong style="color:#fff">DPRD Kutai Timur</strong></p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><i class="fas fa-tv"></i></div>
+          <p>Praktik kerja lapangan di <strong style="color:#fff">TVRI Kalimantan Timur</strong></p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><i class="fas fa-certificate"></i></div>
+          <p>Kompeten dalam <strong style="color:#fff">Uji Sertifikasi Teknik Komputer Jaringan</strong></p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-icon"><i class="fas fa-robot"></i></div>
+          <p>Sertifikat partisipasi <strong style="color:#fff">Robot Car Soccer – HIMATIKA FESTIVAL 2024</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 60px;">
+      <p class="section-title">Keseharian</p>
+      <h2 class="section-heading">Hobi</h2>
+      <div class="hobi-grid">
+        <div class="hobi-card">
+          <div class="hobi-icon">🏸</div>
+          <h4>Badminton</h4>
+          <p>Olahraga rutin yang melatih disiplin, fokus, dan daya tahan tubuh. Selain menyehatkan, badminton juga menjadi sarana relaksasi dan sosialisasi.</p>
+        </div>
+        <div class="hobi-card">
+          <div class="hobi-icon">💻</div>
+          <h4>Coding</h4>
+          <p>Mengembangkan keterampilan teknis melalui pemrograman secara konsisten. Melatih logika berpikir dan kemampuan memecahkan masalah secara kreatif.</p>
+        </div>
+        <div class="hobi-card">
+          <div class="hobi-icon">🌐</div>
+          <h4>Jaringan Komputer</h4>
+          <p>Mendalami instalasi, konfigurasi, dan troubleshooting jaringan LAN. Familiar dengan router, switch, dan dasar-dasar keamanan jaringan.</p>
+        </div>
+        <div class="hobi-card">
+          <div class="hobi-icon">🎮</div>
+          <h4>Bermain Game</h4>
+          <p>Melatih strategi, pengambilan keputusan, dan kerja sama tim. Game juga memperdalam minat terhadap teknologi dan desain interaktif.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-title">Teknologi</p>
+      <h2 class="section-heading">Skills & Favorit</h2>
+      <div class="skills-list">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Django</span>
+        <span class="skill-tag">HTML & CSS</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">Visual Studio Code</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">Virtual Machine</span>
+        <span class="skill-tag">Jaringan Komputer</span>
+        <span class="skill-tag">Cisco Packet Tracer</span>
+        <span class="skill-tag">Winbox</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTIVASI SECTION -->
+  <section id="motivasi" class="section-wrapper">
+    <p class="section-title">Inspirasi</p>
+    <h2 class="section-heading">Motivasi & Inovasi Teknik</h2>
+    <p style="color: var(--text-muted); margin-bottom: 30px;">Kutipan dari pionir teknik dan engineering yang menginspirasi semangat desain, inovasi, dan solusi teknis.</p>
+    
+    <div class="quotes-wrapper">
+      <div class="quote-card">
+        <div class="quote-number">1</div>
+        <div class="quote-photo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/N.Tesla.JPG" alt="Nikola Tesla">
+        </div>
+        <div class="quote-body">
+          <div class="quote-name">Nikola Tesla</div>
+          <div class="quote-text">I don't care that they stole my idea… I care that they don't have any of their own.</div>
+          <div class="quote-dates"><i class="fas fa-calendar-alt"></i> Lahir: 10 Juli 1856 &mdash; Wafat: 7 Januari 1943</div>
+        </div>
+      </div>
+
+      <div class="quote-card reverse">
+        <div class="quote-number">2</div>
+        <div class="quote-photo">
+          <img src="data:image/jpeg;base64,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">
+        </div>
+        <div class="quote-body">
+          <div class="quote-name">B.J. Habibie</div>
+          <div class="quote-text">Teknik adalah seni merancang solusi yang dapat mengubah masa depan bangsa.</div>
+          <div class="quote-dates"><i class="fas fa-calendar-alt"></i> Lahir: 25 Juni 1936 &mdash; Wafat: 11 September 2019</div>
+        </div>
+      </div>
+
+      <div class="quote-card">
+        <div class="quote-number">3</div>
+        <div class="quote-photo">
+          <img src="data:image/png;base64,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" alt="Ada Lovelace">
+        </div>
+        <div class="quote-body">
+          <div class="quote-name">Ada Lovelace</div>
+          <div class="quote-text">The science of operations, as derived from mathematics more especially, is a science of itself.</div>
+          <div class="quote-dates"><i class="fas fa-calendar-alt"></i> Lahir: 10 Desember 1815 &mdash; Wafat: 27 November 1852</div>
+        </div>
+      </div>
+
+      <div class="quote-card reverse">
+        <div class="quote-number">4</div>
+        <div class="quote-photo">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9NM3WM2PRjTxySyEHKKpHyOlgjDmjRTBKdQ&s" alt="Elon Musk">
+        </div>
+        <div class="quote-body">
+          <div class="quote-name">Elon Musk</div>
+          <div class="quote-text">Engineering is the art of solving impossible problems with a solid prototype and relentless iteration.</div>
+          <div class="quote-dates"><i class="fas fa-calendar-alt"></i> Lahir: 28 Juni 1971 &mdash; (masih hidup)</div>
+        </div>
+      </div>
+
+      <div class="quote-card">
+        <div class="quote-number">5</div>
+        <div class="quote-photo">
+          <img src="data:image/jpeg;base64,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" alt="Isambard Kingdom Brunel">
+        </div>
+        <div class="quote-body">
+          <div class="quote-name">Isambard Kingdom Brunel</div>
+          <div class="quote-text">A successful engineering project is measured by how boldly it pushes the boundary of what can be built.</div>
+          <div class="quote-dates"><i class="fas fa-calendar-alt"></i> Lahir: 9 April 1806 &mdash; Wafat: 15 September 1859</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERTIFIKAT SECTION -->
+  <section id="sertifikat" class="section-wrapper">
+    <p class="section-title">Pencapaian</p>
+    <h2 class="section-heading">Sertifikat Saya</h2>
+    <p style="color: var(--text-muted); margin-bottom: 30px;">Kumpulan sertifikat dari pelatihan, kursus, dan kompetisi yang telah saya ikuti.</p>
+
+    <div class="cert-wrapper">
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Robot car soccer.jpg' %}" data-title="Sertifikat Robot car soccer" data-issuer="HIMATIKA UMKT">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Robot car soccer.jpg' %}" alt="Sertifikat 1">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Robot car soccer</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> HIMATIKA UMKT</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat workshop parallaxnet.png' %}" data-title="Sertifikat workshop parallaxnet" data-issuer="parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat workshop parallaxnet.png' %}" alt="Sertifikat 2">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">workshop Parallaxnet</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2024</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Seminar IOT.png' %}" data-title="Sertifikat IOT MicroPython & ESP32" data-issuer="Engineering Education">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Seminar IOT.png' %}" alt="Sertifikat 3">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">IOT MicroPython & ESP32</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Engineering Education</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat UI UX MySkill.png' %}" data-title="Sertifikat UI UX MySkill" data-issuer="MySkill">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat UI UX MySkill.png' %}" alt="Sertifikat 4">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">UI UX MySkill</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> MySkill</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Data Analysis MySkill.png' %}" data-title="Sertifikat Data Analysis MySkill" data-issuer="MySkill">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Data Analysis MySkill.png' %}" alt="Sertifikat 5">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Data Analysis MySkill</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> MySkill</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2026</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Software Engineering.png' %}" data-title="Sertifikat Software Engineering" data-issuer="Parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Software Engineering.png' %}" alt="Sertifikat 6">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Software Engineering</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat CyberSecurity.png' %}" data-title="Sertifikat CyberSecurity" data-issuer="Parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat CyberSecurity.png' %}" alt="Sertifikat 7">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">CyberSecurity</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Cloud Computing.png' %}" data-title="Sertifikat Cloud Computing" data-issuer="Parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Cloud Computing.png' %}" alt="Sertifikat 8">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Cloud Computing</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Techpreneur.png' %}" data-title="Sertifikat Techpreneur" data-issuer="Parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Techpreneur.png' %}" alt="Sertifikat 9">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Techpreneur</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+
+      <div class="cert-card" onclick="bukaModal(this)" data-img="{% static 'images/Sertifikat Business Plan.png' %}" data-title="Sertifikat Business Plan" data-issuer="Parallaxnet">
+        <div class="cert-img-wrap">
+          <img src="{% static 'images/Sertifikat Business Plan.png' %}" alt="Sertifikat 10">
+          <div class="cert-overlay"><i class="fas fa-expand"></i></div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">Business Plan</div>
+          <div class="cert-issuer"><i class="fas fa-building"></i> Parallaxnet</div>
+          <div class="cert-date"><i class="fas fa-calendar-alt"></i> 2025</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAK SECTION -->
+  <section id="kontak" class="section-wrapper">
+    <p class="section-title">Hubungi Saya</p>
+    <h2 class="section-heading">Kontak</h2>
+    <p style="color: var(--text-muted); margin-bottom: 30px;">Punya pertanyaan atau ingin berkolaborasi? Kirim pesan dan saya akan segera merespons.</p>
+    
+    <div class="contact-main">
+      <div class="form-card">
+        <h2><i class="fas fa-paper-plane"></i> Kirim Pesan</h2>
+        {% if messages %}
+          {% for message in messages %}
+            <div style="background: rgba(0, 224, 183, 0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 14px 16px; font-size: 14px; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+              <i class="fas fa-check-circle"></i> {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama kamu" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Alamat Email</label>
+            <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="pesan">Pesan</label>
+            <textarea id="pesan" name="pesan" rows="5" placeholder="Tulis pesanmu di sini..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-paper-plane"></i> Kirim Pesan
+          </button>
+        </form>
+      </div>
+
+      <div class="info-col">
+        <div class="info-card">
+          <h2><i class="fas fa-address-book"></i> Info Kontak</h2>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+            <div class="contact-detail">
+              <div class="label">Instagram</div>
+              <a href="https://www.instagram.com/yusfsyah" target="_blank">@yusfsyah</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-detail">
+              <div class="label">WhatsApp</div>
+              <a href="https://wa.me/6282255303793" target="_blank">+62 822-5530-3793</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-detail">
+              <div class="label">Email</div>
+              <a href="mailto:myusuf28062005@gmail.com">myusuf28062005@gmail.com</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Media Sosial</h2>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://www.instagram.com/yusfsyah" target="_blank" style="flex: 1; padding: 12px; border-radius: 10px; background: #111; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;">
+              <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="https://wa.me/6282255303793" target="_blank" style="flex: 1; padding: 12px; border-radius: 10px; background: #111; border: 1px solid var(--border); color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.2s;">
+              <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modal" onclick="tutupModal(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="tutupModal()"><i class="fas fa-times"></i></button>
+      <img class="modal-img" id="modal-img" src="" alt="">
+      <div class="modal-info">
+        <div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-issuer" id="modal-issuer"></div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <section class="section">
-    <p class="section-title">Tentang</p>
-    <h2 class="section-heading">Yang Saya Kuasai</h2>
-    <div class="about-grid">
-      <div class="about-card"><h3><i class="fas fa-network-wired"></i> Jaringan Komputer</h3><p>Berpengalaman dalam konfigurasi jaringan, troubleshooting, dan instalasi infrastruktur IT di lingkungan profesional.</p></div>
-      <div class="about-card"><h3><i class="fas fa-laptop-code"></i> Pemrograman</h3><p>Mengembangkan aplikasi web menggunakan Python, Django, HTML, CSS, dan JavaScript untuk berbagai kebutuhan digital.</p></div>
-      <div class="about-card"><h3><i class="fas fa-database"></i> Database</h3><p>Familiar dengan pengelolaan database menggunakan PostgreSQL dan Supabase untuk aplikasi skala kecil hingga menengah.</p></div>
-      <div class="about-card"><h3><i class="fas fa-tools"></i> Pengalaman Lapangan</h3><p>Praktik kerja di DPRD Kutai Timur dan TVRI Kalimantan Timur memberikan pengalaman nyata di dunia kerja IT.</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <p class="section-title">Teknologi</p>
-    <h2 class="section-heading">Favorite</h2>
-    <div class="skills-list">
-      <span class="skill-tag">Python</span>
-      <span class="skill-tag">Django</span>
-      <span class="skill-tag">HTML & CSS</span>
-      <span class="skill-tag">PostgreSQL</span>
-      <span class="skill-tag">Visual Studio Code</span>
-      <span class="skill-tag">Git</span>
-      <span class="skill-tag">Virtual Machine</span>
-      <span class="skill-tag">Jaringan Komputer</span>
-      <span class="skill-tag">Cisco Packet Tracer</span>
-      <span class="skill-tag">Winbox</span>
-    </div>
-  </section>
 
   <footer>
     <span>Muhammad Yusuf Syahputra</span>.
   </footer>
 
   <script>
+    // Smooth scrolling dan active navigation
+    function scrollToSection(sectionId) {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Update active nav link saat scroll
+    window.addEventListener('scroll', function() {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('onclick').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Modal functions
+    function bukaModal(card) {
+      document.getElementById('modal-img').src = card.dataset.img;
+      document.getElementById('modal-title').textContent = card.dataset.title;
+      document.getElementById('modal-issuer').textContent = card.dataset.issuer;
+      document.getElementById('modal').classList.add('active');
+    }
+    function tutupModal(e) {
+      if (!e || e.target === document.getElementById('modal') || e.currentTarget.classList.contains('modal-close')) {
+        document.getElementById('modal').classList.remove('active');
+      }
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') tutupModal(); });
+
+    // Typewriter effect
     document.addEventListener("DOMContentLoaded", function () {
       const teks = ["Network Engineer 🌐", "Web Developer 💻", "Python Enthusiast 🐍", "IT Student 🎓"];
       const target = document.querySelector(".typewriter");
