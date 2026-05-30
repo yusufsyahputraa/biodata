@@ -78,7 +78,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [str(BASE_DIR / 'static')]
+STATICFILES_DIRS = [str(BASE_DIR / 'static')] if os.path.isdir(str(BASE_DIR / 'static')) else []
 STATIC_ROOT = str(BASE_DIR / 'staticfiles_build' / 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
