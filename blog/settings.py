@@ -81,6 +81,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(BASE_DIR / 'static')] if os.path.isdir(str(BASE_DIR / 'static')) else []
 STATIC_ROOT = str(BASE_DIR / 'staticfiles_build' / 'static')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
