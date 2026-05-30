@@ -22,7 +22,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← pindah ke sini
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -31,7 +31,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'myself.urls'  # ← sesuaikan nama project
+ROOT_URLCONF = 'blog.urls'  # ← diperbaiki
 
 TEMPLATES = [
     {
@@ -49,7 +49,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'myself.wsgi.application'  # ← sesuaikan nama project
+WSGI_APPLICATION = 'blog.wsgi.application'  # ← diperbaiki
 
 DATABASES = {
     'default': {
@@ -73,13 +73,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'Asia/Makassar'  # ← timezone Balikpapan (WITA)
+TIME_ZONE = 'Asia/Makassar'
 USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(BASE_DIR / 'static')]
-STATIC_ROOT = str(BASE_DIR / 'staticfiles_build' / 'static')  # ← untuk Vercel
+STATIC_ROOT = str(BASE_DIR / 'staticfiles_build' / 'static')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
