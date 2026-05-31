@@ -14,8 +14,6 @@ ENV/
 
 # Static files (jika kamu TIDAK pakai collectstatic)
 staticfiles/
-staticfiles_build/
-static/
 
 # Environment & secrets
 .env
