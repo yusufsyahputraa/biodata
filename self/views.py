@@ -24,4 +24,4 @@ def kontak_view(request):
         messages.success(request, 'Pesan berhasil dikirim! Terima kasih')
         return redirect('dashboard')
 
-    return render(request, 'kontak.html')
+    return render(request, 'dashboard.html')
