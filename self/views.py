@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Kontak
+from django.contrib import messages
 
 def about_view(request):
     return render(request, 'about.html')
