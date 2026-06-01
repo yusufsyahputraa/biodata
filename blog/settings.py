@@ -29,7 +29,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'blog.urls'  # ← diperbaiki
+ROOT_URLCONF = 'blog.urls'  
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://yusufsyahputra.vercel.app',  
+]
 
 TEMPLATES = [
     {
