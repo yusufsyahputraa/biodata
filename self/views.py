@@ -22,6 +22,6 @@ def kontak_view(request):
 
         Kontak.objects.create(nama=nama, email=email, pesan=pesan)
         messages.success(request, 'Pesan berhasil dikirim! Terima kasih')
-        return redirect('kontak')
+        return redirect('dashboard')
 
     return render(request, 'kontak.html')
